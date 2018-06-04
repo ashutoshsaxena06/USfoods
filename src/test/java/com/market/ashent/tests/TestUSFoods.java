@@ -61,24 +61,24 @@ public class TestUSFoods extends CommonUSFoods {
 	@BeforeSuite
 	public void beforeData() throws Exception {
 		exportworkbook = ExcelFunctions.openFile(inputFile);
-		logger.info("Test data read.");
+		System.out.println("Test data read.");
 		inputsheet = exportworkbook.getSheet(project);
 		AcColStatus = ExcelFunctions.getColumnNumber("Export Status", inputsheet);
 		AcColdetail = ExcelFunctions.getColumnNumber("Detailed Export Status", inputsheet);
 
-		logger.info("Exiting before data.");
+		System.out.println("Exiting before data.");
 	}
 
 	@AfterSuite
 	public void closeResources() throws SQLException, IOException {
-		logger.info("Closing the resources!");
+		System.out.println("Closing the resources!");
 
 		if (out != null) {
-			logger.info("Closing file output stream object!");
+			System.out.println("Closing file output stream object!");
 			out.close();
 		}
 		if (driver != null) {
-			logger.info("Closing the browser!");
+			System.out.println("Closing the browser!");
 			// TestCases.driver.close();
 			driver.quit();
 		}
@@ -94,12 +94,12 @@ public class TestUSFoods extends CommonUSFoods {
 		System.out.println("***********StartTest*********");
 		RandomAction.deleteFiles("C:\\Users\\Edge\\Downloads");
 		driver = RandomAction.openBrowser("Chrome", path);
-		logger.info("Invoked browser .. ");
+		System.out.println("Invoked browser .. ");
 	}
 
 	@AfterMethod
 	public static void writeExcel() throws IOException {
-		logger.info("Running Excel write method!");
+		System.out.println("Running Excel write method!");
 		out = new FileOutputStream(new File(reportFile));
 		exportworkbook.write(out);
 		acno++;
@@ -108,13 +108,13 @@ public class TestUSFoods extends CommonUSFoods {
 
 	@DataProvider(name = "testData")
 	public static Object[][] testData() throws IOException {
-		logger.info("Inside Dataprovider. Creating the Object Array to store test data inputs.");
+		System.out.println("Inside Dataprovider. Creating the Object Array to store test data inputs.");
 		Object[][] td = null;
 		try {
 			// Get TestCase sheet data
 			int totalNoOfCols = inputsheet.getRow(inputsheet.getFirstRowNum()).getPhysicalNumberOfCells();
 			totalNoOfRows = inputsheet.getLastRowNum();
-			logger.info(totalNoOfRows + " Accounts and Columns are: " + totalNoOfCols);
+			System.out.println(totalNoOfRows + " Accounts and Columns are: " + totalNoOfCols);
 			td = new String[totalNoOfRows][totalNoOfCols];
 			for (int i = 1; i <= totalNoOfRows; i++) {
 				for (int j = 0; j < totalNoOfCols; j++) {
@@ -124,7 +124,7 @@ public class TestUSFoods extends CommonUSFoods {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("Test Cases captured in the Object Array. Exiting dataprovider.");
+		System.out.println("Test Cases captured in the Object Array. Exiting dataprovider.");
 		return td;
 	}
 
@@ -139,7 +139,7 @@ public class TestUSFoods extends CommonUSFoods {
 							   String exportstatus, 
 							   String detailedstatus) {
 		Boolean result;
-		logger.info("Inside OG Export : Started exporting OG for different accounts");
+		System.out.println("Inside OG Export : Started exporting OG for different accounts");
 		XSSFCell cell1, cell2;
 		TestUSFoods.rowIndex = Math.floorMod(TestUSFoods.acno, TestUSFoods.totalNoOfRows) + 1;
 
@@ -159,7 +159,7 @@ public class TestUSFoods extends CommonUSFoods {
 		try {
 			if (active.equalsIgnoreCase("Yes")) {
 				// if list is not empty
-				logger.info(restaurant_name + " for purveryor " + purveyor + " is Active !!");
+				System.out.println(restaurant_name + " for purveryor " + purveyor + " is Active !!");
 				if (listname != null && listname.length() != 0) {
 					CommonUSFoods testUS = new TestUSFoods(driver);
 						result = testUS.startUSF(listname.trim(), username.trim(), password.trim());				
@@ -180,13 +180,13 @@ public class TestUSFoods extends CommonUSFoods {
 				Thread.sleep(5000);
 				SendMailSSL.sendMailActionCsvDE(purveyor.trim(), restaurant_name.trim());
 			} else {
-				logger.info(restaurant_name + " for purveryor " + purveyor + " is not Active !!");
+				System.out.println(restaurant_name + " for purveryor " + purveyor + " is not Active !!");
 				exportstatus = "Not Active";
 			}
 			cell1.setCellValue(exportstatus);
 			cell2.setCellValue(detailedstatus);
 
-			logger.info("Exiting test method");
+			System.out.println("Exiting test method");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -194,10 +194,10 @@ public class TestUSFoods extends CommonUSFoods {
 			detailedstatus = "Some technical issue ocurred during export";
 			cell1.setCellValue(exportstatus);
 			cell2.setCellValue(detailedstatus);
-			logger.info("Technical issue occured during export for restaurant - "+restaurant_name);
+			System.out.println("Technical issue occured during export for restaurant - "+restaurant_name);
 			Assert.assertTrue(false);
 		}
-		logger.info(emailMessageExport.trim());
+		System.out.println(emailMessageExport.trim());
 	}
 
 	////////////////////////////////////////////////
@@ -207,7 +207,7 @@ public class TestUSFoods extends CommonUSFoods {
 			String emailMsg = "Daily " + project + " OG Export Status: " + RandomAction.getDate();
 			
 			SendMailSSL.sendReport(emailMsg, reportFile);
-			logger.info("Email Sent with Attachment");
+			System.out.println("Email Sent with Attachment");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
