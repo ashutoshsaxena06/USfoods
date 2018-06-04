@@ -4,7 +4,7 @@
 
 	<groupId>com.market.ashent</groupId>
 	<artifactId>USfoodsOnline</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>USfoodsOnline</name>
@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>com.market.ashent</groupId>
 			<artifactId>AutoFrame</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2</version>
 		</dependency>
 
 		<dependency>
