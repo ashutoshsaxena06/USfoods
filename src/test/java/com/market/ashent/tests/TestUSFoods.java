@@ -46,35 +46,27 @@ public class TestUSFoods extends CommonUSFoods {
 	// Date().toString().replace(":", "").replace(" ", "")+".xlsx";
 	public static int acno;
 	public static XSSFWorkbook exportworkbook;
-	static {
-		try {
-			ExcelFunctions.openFile(inputFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	public static String project = "USF";
-	public static XSSFSheet inputsheet=exportworkbook.getSheet(project);
-	public static int AcColStatus=ExcelFunctions.getColumnNumber("Export Status", inputsheet);
-	public static int  AcColdetail=ExcelFunctions.getColumnNumber("Detailed Export Status", inputsheet);
+	public static XSSFSheet inputsheet;
+	public static int AcColStatus, AcColdetail;
 	public static FileOutputStream out;
 	public static int totalNoOfRows;
 	public static String folderDate;
 	public static String currList = "";
 	public static String emailMessageExport = "";
 	public static String path = "C:\\Users\\Edge\\Downloads\\chromedriver_win32\\chromedriver.exe";
+	public static String project = "USF";
+
 	private final static Logger logger = Logger.getLogger(TestUSFoods.class);
 
 	@BeforeSuite
-	public void beforeData() throws Exception {
-		/*
+	public static void beforeData() throws Exception {
 		exportworkbook = ExcelFunctions.openFile(inputFile);
 		System.out.println("Test data read.");
 		inputsheet = exportworkbook.getSheet(project);
 		AcColStatus = ExcelFunctions.getColumnNumber("Export Status", inputsheet);
 		AcColdetail = ExcelFunctions.getColumnNumber("Detailed Export Status", inputsheet);
+
 		System.out.println("Exiting before data.");
-		*/
 	}
 
 	@AfterSuite
