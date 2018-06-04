@@ -36,11 +36,11 @@ public class TestUSFoods extends CommonUSFoods {
 	static int retry = 0;
 	public static int rowIndex;
 	public static String projectPath = System.getProperty("user.dir");
-	public static String inputFile = "C:\\Users\\my\\Downloads\\ExportEngineInput.xlsx";
+	public static String inputFile = "C:\\Users\\Edge\\Desktop\\ExportEngineInput.xlsx";
 	// projectPath + "\\config\\ExportEngineInput.xlsx";
 	public static SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-	public static String reportFile = "C:\\Users\\my\\Downloads\\Reports\\USF_OG_report\\ExportSummary_USF_"+ new Date().toString().replace(":", "").replace(" ", "") + ".xlsx";
-			// for Edge - "C:\\Users\\Edge\\Desktop\\Reports\\SyscoOG_report\\ExportSummary_Sysco_" + PageAction.getDate().toString().replace(" ", "_");
+	public static String reportFile = "C:\\Users\\Edge\\Desktop\\Reports\\USF_OG_report\\ExportSummary_USF_"+ new Date().toString().replace(":", "").replace(" ", "") + ".xlsx";
+			// for Edge - "C:\Users\Edge\Desktop\\Reports\\SyscoOG_report\\ExportSummary_Sysco_" + PageAction.getDate().toString().replace(" ", "_");
 //			+ new Date().toString().replace(":", "").replace(" ", "") + ".xlsx";
 	// projectPath+ "\\Output_Summary\\ExportSummary_Sysco_" + new
 	// Date().toString().replace(":", "").replace(" ", "")+".xlsx";
@@ -53,7 +53,7 @@ public class TestUSFoods extends CommonUSFoods {
 	public static String folderDate;
 	public static String currList = "";
 	public static String emailMessageExport = "";
-	public static String path = "C:\\Users\\my\\Downloads\\chromedriver_win32_new\\chromedriver.exe";
+	public static String path = System.getProperty("user.home")+"\\Downloads\\chromedriver_win32\\chromedriver.exe";
 	public static String project = "USF";
 	private final static Logger logger = Logger.getLogger(TestUSFoods.class);
 	public static CommonUSFoods testUS = new TestUSFoods();
