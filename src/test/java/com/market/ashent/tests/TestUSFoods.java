@@ -15,9 +15,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -28,18 +28,18 @@ import com.util.framework.SendMailSSL;
 
 public class TestUSFoods extends CommonUSFoods {
 
-	public TestUSFoods(WebDriver driver) {
-		super(driver);
-	}
+//	public TestUSFoods(WebDriver driver) {
+//		super(driver);
+//	}
 
 	static final int maxtry = 3;
 	static int retry = 0;
 	public static int rowIndex;
 	public static String projectPath = System.getProperty("user.dir");
-	public static String inputFile = "C:\\Users\\Edge\\Desktop\\ExportEngineInput.xlsx";
+	public static String inputFile = "C:\\Users\\my\\Downloads\\ExportEngineInput.xlsx";
 	// projectPath + "\\config\\ExportEngineInput.xlsx";
 	public static SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-	public static String reportFile = "C:\\Users\\Edge\\Desktop\\Reports\\USF_OG_report\\ExportSummary_USF_"+ new Date().toString().replace(":", "").replace(" ", "") + ".xlsx";
+	public static String reportFile = "C:\\Users\\my\\Downloads\\Reports\\USF_OG_report\\ExportSummary_USF_"+ new Date().toString().replace(":", "").replace(" ", "") + ".xlsx";
 			// for Edge - "C:\\Users\\Edge\\Desktop\\Reports\\SyscoOG_report\\ExportSummary_Sysco_" + PageAction.getDate().toString().replace(" ", "_");
 //			+ new Date().toString().replace(":", "").replace(" ", "") + ".xlsx";
 	// projectPath+ "\\Output_Summary\\ExportSummary_Sysco_" + new
@@ -53,24 +53,18 @@ public class TestUSFoods extends CommonUSFoods {
 	public static String folderDate;
 	public static String currList = "";
 	public static String emailMessageExport = "";
-	public static String path = "C:\\Users\\Edge\\Downloads\\chromedriver_win32\\chromedriver.exe";
+	public static String path = "C:\\Users\\my\\Downloads\\chromedriver_win32_new\\chromedriver.exe";
 	public static String project = "USF";
-
 	private final static Logger logger = Logger.getLogger(TestUSFoods.class);
+	public static CommonUSFoods testUS = new TestUSFoods();
 
-	@BeforeSuite
+	@BeforeTest
 	public static void beforeData() throws Exception {
-		exportworkbook = ExcelFunctions.openFile(inputFile);
-		System.out.println("Test data read.");
-		inputsheet = exportworkbook.getSheet(project);
-		AcColStatus = ExcelFunctions.getColumnNumber("Export Status", inputsheet);
-		AcColdetail = ExcelFunctions.getColumnNumber("Detailed Export Status", inputsheet);
-
 		System.out.println("Exiting before data.");
 	}
 
-	@AfterSuite
-	public void closeResources() throws SQLException, IOException {
+	@AfterTest
+	public static void closeResources() throws SQLException, IOException {
 		System.out.println("Closing the resources!");
 
 		if (out != null) {
@@ -92,8 +86,8 @@ public class TestUSFoods extends CommonUSFoods {
 	public static void setUp() throws IOException {
 		// to get the browser on which the UI test has to be performed.
 		System.out.println("***********StartTest*********");
-		RandomAction.deleteFiles("C:\\Users\\Edge\\Downloads");
-		driver = RandomAction.openBrowser("Chrome", path);
+//		RandomAction.deleteFiles("C:\\Users\\Edge\\Downloads");
+		setDriver(RandomAction.openBrowser("Chrome", path));
 		System.out.println("Invoked browser .. ");
 	}
 
@@ -108,6 +102,11 @@ public class TestUSFoods extends CommonUSFoods {
 
 	@DataProvider(name = "testData")
 	public static Object[][] testData() throws IOException {
+		exportworkbook = ExcelFunctions.openFile(inputFile);
+		System.out.println("Test data read.");
+		inputsheet = exportworkbook.getSheet(project);
+		AcColStatus = ExcelFunctions.getColumnNumber("Export Status", inputsheet);
+		AcColdetail = ExcelFunctions.getColumnNumber("Detailed Export Status", inputsheet);
 		System.out.println("Inside Dataprovider. Creating the Object Array to store test data inputs.");
 		Object[][] td = null;
 		try {
@@ -128,8 +127,8 @@ public class TestUSFoods extends CommonUSFoods {
 		return td;
 	}
 
-	@Test//(dataProvider = "testData")
-	public void Export_Mail_OG(String active,
+	@Test(dataProvider = "testData")
+	public static void Export_Mail_OG(String active,
 							   String accountID, 
 							   String purveyor, 
 							   String restaurant_name,
@@ -161,7 +160,6 @@ public class TestUSFoods extends CommonUSFoods {
 				// if list is not empty
 				System.out.println(restaurant_name + " for purveryor " + purveyor + " is Active !!");
 				if (listname != null && listname.length() != 0) {
-					CommonUSFoods testUS = new TestUSFoods(driver);
 						result = testUS.startUSF(listname.trim(), username.trim(), password.trim());				
 					if (result.equals(true)) {
 						emailMessageExport = "Pass";
