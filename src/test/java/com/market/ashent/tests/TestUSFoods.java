@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -31,15 +30,14 @@ public class TestUSFoods extends CommonUSFoods {
 //	public TestUSFoods(WebDriver driver) {
 //		super(driver);
 //	}
-
-	static final int maxtry = 3;
-	static int retry = 0;
 	public static int rowIndex;
 	public static String projectPath = System.getProperty("user.dir");
 	public static String inputFile = "C:\\Users\\Edge\\Desktop\\ExportEngineInput.xlsx";
+			//"C:\\Users\\my\\Downloads\\ExportEngineInput.xlsx";
 	// projectPath + "\\config\\ExportEngineInput.xlsx";
 	public static SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-	public static String reportFile = "C:\\Users\\Edge\\Desktop\\Reports\\USF_OG_report\\ExportSummary_USF_"+ new Date().toString().replace(":", "").replace(" ", "") + ".xlsx";
+	public static String reportFile ="C:\\Users\\Edge\\Desktop\\Reports\\USF_OG_report\\ExportSummary_USF_"+ new Date().toString().replace(":", "").replace(" ", "") + ".xlsx"; 
+			//"C:\\Users\\my\\Downloads\\Reports\\USF_OG_report\\ExportSummary_USF_"+ new Date().toString().replace(":", "").replace(" ", "") + ".xlsx";
 			// for Edge - "C:\Users\Edge\Desktop\\Reports\\SyscoOG_report\\ExportSummary_Sysco_" + PageAction.getDate().toString().replace(" ", "_");
 //			+ new Date().toString().replace(":", "").replace(" ", "") + ".xlsx";
 	// projectPath+ "\\Output_Summary\\ExportSummary_Sysco_" + new
@@ -54,13 +52,14 @@ public class TestUSFoods extends CommonUSFoods {
 	public static String currList = "";
 	public static String emailMessageExport = "";
 	public static String path = System.getProperty("user.home")+"\\Downloads\\chromedriver_win32\\chromedriver.exe";
+			//System.getProperty("user.home")+"\\Downloads\\chromedriver_win32_new\\chromedriver.exe";
 	public static String project = "USF";
 	private final static Logger logger = Logger.getLogger(TestUSFoods.class);
 	public static CommonUSFoods testUS = new TestUSFoods();
 
 	@BeforeTest
 	public static void beforeData() throws Exception {
-		System.out.println("Exiting before data.");
+		System.out.println("before data.");
 	}
 
 	@AfterTest
