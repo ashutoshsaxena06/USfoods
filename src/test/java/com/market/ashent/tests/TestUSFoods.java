@@ -85,7 +85,7 @@ public class TestUSFoods extends CommonUSFoods {
 	public static void setUp() throws IOException {
 		// to get the browser on which the UI test has to be performed.
 		System.out.println("***********StartTest*********");
-//		RandomAction.deleteFiles("C:\\Users\\Edge\\Downloads");
+		RandomAction.deleteFiles("C:\\Users\\Edge\\Downloads");
 		setDriver(RandomAction.openBrowser("Chrome", path));
 		System.out.println("Invoked browser .. ");
 	}
