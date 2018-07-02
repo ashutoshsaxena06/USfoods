@@ -132,7 +132,8 @@ public class TestUSFoods extends CommonUSFoods {
 							   String purveyor, 
 							   String restaurant_name,
 							   String username, 
-							   String password, 
+							   String password,
+							   String account,
 							   String listname, 
 							   String exportstatus, 
 							   String detailedstatus) {
@@ -159,7 +160,7 @@ public class TestUSFoods extends CommonUSFoods {
 				// if list is not empty
 				System.out.println(restaurant_name + " for purveryor " + purveyor + " is Active !!");
 				if (listname != null && listname.length() != 0) {
-						result = testUS.startUSF(listname.trim(), username.trim(), password.trim());				
+						result = testUS.startUSF(listname.trim(), account, username.trim(), password.trim());				
 					if (result.equals(true)) {
 						emailMessageExport = "Pass";
 						exportstatus = "Pass";
