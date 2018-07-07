@@ -176,7 +176,7 @@ public class TestUSFoods extends CommonUSFoods {
 					detailedstatus = "Error : Please provide valid List name";
 				}
 				Thread.sleep(5000);
-				SendMailSSL.sendMailActionCsvDE(purveyor.trim(), restaurant_name.trim());
+				SendMailSSL.sendMailActionPDF(purveyor.trim(), restaurant_name.trim());
 			} else {
 				System.out.println(restaurant_name + " for purveryor " + purveyor + " is not Active !!");
 				exportstatus = "Not Active";
