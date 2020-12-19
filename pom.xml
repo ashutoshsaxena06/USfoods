@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>com.market.ashent</groupId>
 			<artifactId>AutoFrame</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.4-USF</version>
 		</dependency>
 
 		<dependency>
