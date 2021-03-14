@@ -101,7 +101,7 @@ public class TestUSFoods extends CommonUSFoods {
 		exportworkbook.write(out);
 		acno++;
 		try {
-			driver.close();
+			driver.quit();
 		} catch (Exception e) {
 			System.out.println("already closed");
 		}
